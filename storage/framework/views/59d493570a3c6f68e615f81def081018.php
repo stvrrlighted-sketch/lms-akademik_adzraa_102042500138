@@ -1,0 +1,11 @@
+<?php $__errorArgs = [$nama];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+    <p class="galat" id="galat-<?php echo e($nama); ?>" role="alert"><?php echo e($message); ?></p>
+<?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+<?php /**PATH /Users/adzraaaliyyahalthaaf/Downloads/akademik-app_Adzraa_102042500138/resources/views/partials/galat.blade.php ENDPATH**/ ?>
