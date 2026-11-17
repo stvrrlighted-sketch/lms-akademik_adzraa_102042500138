@@ -1,8 +1,7 @@
-# LMS Telkom University (Laravel 13)
+# LMS Telkom University 
 
-Sistem manajemen pembelajaran (LMS) sederhana dengan tiga peran: `admin`, `dosen`, dan `mahasiswa`. Hanya memakai database lokal (SQLite), tanpa API eksternal atau layanan pihak ketiga. Autentikasi (siapa Anda) ditangani login di `AutentikasiController`. Otorisasi (apa yang boleh Anda buka) ditangani middleware `CheckRole` per rute, ditambah pembatasan per data di tiap controller.
+Sistem manajemen pembelajaran (LMS) sederhana dengan tiga peran: `admin`, `dosen`, dan `mahasiswa`. Hanya memakai database lokal (SQLite), tanpa API eksternal atau layanan pihak ketiga. Autentikasi ditangani login di `AutentikasiController`. Otorisasi ditangani middleware `CheckRole` per rute, ditambah pembatasan per data di tiap controller.
 
-## Status verifikasi
 
 Kode ini belum dijalankan. Lingkungan penyusunnya tidak punya PHP maupun akses jaringan, jadi seluruh berkas hanya diperiksa lewat inspeksi kode dan pemeriksaan struktur (kurung seimbang, nama rute, nama view, dan nama metode controller saling cocok). Jalankan daftar uji manual di bagian "Pengujian manual" sebelum dipakai, dan laporkan galat yang muncul.
 
@@ -32,13 +31,11 @@ php artisan serve
 | mahasiswa | mahasiswa@student.telkomuniversity.ac.id | password |
 | mahasiswa (tanpa kelas) | mahasiswa2@student.telkomuniversity.ac.id | password |
 
-Seeder juga membuat program studi Informatika, tahun ajaran "2026/2027 Ganjil" (aktif), dua mata kuliah (IF-PAW dan IF-KKD) dengan kelas A diampu Dosen Uji, Mahasiswa Uji terdaftar di keduanya, 14 pertemuan per kelas, dan satu berita sambutan. Seeder berhenti sendiri di lingkungan `production`. Hapus atau ganti akun ini sebelum dipakai pengguna sungguhan. Email tidak benar-benar dikirim ke mana pun; domain `telkomuniversity.ac.id` hanya format penamaan akun di database lokal.
+Seeder juga membuat program studi Informatika, tahun ajaran "2026/2027 Ganjil" (aktif), dua mata kuliah (IF-PAW dan IF-KKD) dengan kelas A diampu Dosen Uji, Mahasiswa Uji terdaftar di keduanya, 14 pertemuan per kelas, dan satu berita sambutan. Seeder berhenti sendiri di lingkungan `production`.Email tidak benar-benar dikirim ke mana pun; domain `telkomuniversity.ac.id` hanya format penamaan akun di database lokal.
 
 ## Halaman sebelum login
 
-Ada lima halaman: beranda (`/`), FAQ (`/faq`), Tutorial (`/tutorial`), masuk (`/login`), dan lupa kata sandi (`/lupa-kata-sandi`). Desainnya mengikuti referensi halaman LMS yang Anda lampirkan: bilah navigasi kaca di atas, kartu utama merah Telkom, tombol masuk berbingkai merah dengan ikon gembok, dan catatan singkat di bawahnya. Isinya branding (nama aplikasi dari `APP_NAME` di `.env`, sekarang "LMS Telkom University") dan akses autentikasi. FAQ dan Tutorial hanya berisi panduan cara mendapatkan akun, masuk, mengatur ulang kata sandi, mengganti bahasa dan tema, serta pesan "Jika ada pertanyaan, silakan chat admin."; keduanya tidak menjelaskan fitur LMS. Antarmuka sebelum login selebihnya tidak menampilkan atau menjelaskan fitur LMS; deskripsi fitur ada di README ini. Bagian referensi yang sengaja tidak dibuat: menu About dan panel pengumuman. Kontak admin hanya berupa teks; belum ada fitur chat di aplikasi. Logo dan merek resmi institusi tidak disertakan.
-
-Tidak ada pendaftaran akun mandiri: tidak ada rute, tombol, maupun halaman "Daftar", dan `/register` menghasilkan 404. Akun hanya dibuat admin.
+Ada lima halaman: beranda (`/`), FAQ (`/faq`), Tutorial (`/tutorial`), masuk (`/login`).
 
 ### Lupa kata sandi
 
@@ -213,7 +210,7 @@ Berkas materi dan pengumpulan tugas disimpan privat di `storage/app/private` dan
 
 Jalankan dan catat hasilnya. Langkah 1 sampai 4 menguji tampilan dan fitur baru; langkah 5 dan seterusnya menguji fitur LMS.
 
-1. Halaman sebelum login: tanpa login, buka `/`, `/faq`, `/tutorial`, `/login`, dan `/lupa-kata-sandi`. Pastikan tidak ada penjelasan fitur, tidak ada tombol pendaftaran (`/register` harus 404), dan bilah navigasi atas tetap terlihat. Buka satu pertanyaan di FAQ dan pastikan halaman masih utuh. Ubah ukuran jendela (atau pakai mode perangkat di DevTools) ke 320x568, 360x640, 768x1024, 1366x768, dan landscape 800x360, lalu pastikan seluruh elemen utuh tanpa bilah gulir halaman, juga saat pesan galat login muncul. Di lebar di bawah 1024 piksel, menu harus pindah ke bilah bawah.
+1. Halaman sebelum login: tanpa login, buka `/`, `/faq`, `/tutorial`, `/login`. Pastikan tidak ada penjelasan fitur, tidak ada tombol pendaftaran (`/register` harus 404), dan bilah navigasi atas tetap terlihat. Buka satu pertanyaan di FAQ dan pastikan halaman masih utuh. Ubah ukuran jendela (atau pakai mode perangkat di DevTools) ke 320x568, 360x640, 768x1024, 1366x768, dan landscape 800x360, lalu pastikan seluruh elemen utuh tanpa bilah gulir halaman, juga saat pesan galat login muncul. Di lebar di bawah 1024 piksel, menu harus pindah ke bilah bawah.
 2. Tema dan bahasa: klik tombol tema berulang (Sistem, Terang, Gelap) dan pastikan latar putih polos atau hitam polos, serta mengikuti tema perangkat saat "Sistem". Klik tombol bahasa dan pastikan seluruh halaman (juga setelah login, termasuk pesan notifikasi dan pesan galat) berganti ke Inggris dan kembali. Arahkan kursor ke ikon menu dan pastikan tooltip nama menu muncul.
 3. Login sebagai admin dan buka Berita. Tulis berita dengan gambar yang lebih besar dari 1280 x 720: alat potong harus terbuka otomatis, hasilnya 1280 x 720. Tulis berita tanpa gambar dan pastikan tidak ada bingkai gambar kosong di dasbor, detail, dan daftar. Tulis lebih dari 3 berita: dasbor menampilkan 3 kartu dengan tombol panah kiri dan kanan. Klik sebuah kartu: halaman detail menampilkan teks lengkap dan gambar tanpa dipotong.
 4. Kedaluwarsa dan notifikasi: beri satu berita tanggal kedaluwarsa kemarin. Admin dan dosen masih melihatnya (bertanda Kedaluwarsa), mahasiswa tidak melihatnya di dasbor dan mendapat 404 bila membuka alamat detailnya. Pastikan setiap tambah, ubah, dan hapus memunculkan notifikasi yang hilang sendiri setelah 5 detik atau saat tombol tutup diklik.
