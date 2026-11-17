@@ -35,7 +35,7 @@ Seeder juga membuat program studi Informatika, tahun ajaran "2026/2027 Ganjil" (
 
 ## Halaman sebelum login
 
-Ada lima halaman: beranda (`/`), FAQ (`/faq`), Tutorial (`/tutorial`), masuk (`/login`).
+Ada empat halaman: beranda (`/`), FAQ (`/faq`), Tutorial (`/tutorial`), masuk (`/login`).
 
 ### Lupa kata sandi
 
